@@ -28,4 +28,48 @@ function h() {
 	exit
 }
 
-h
+# Prints an error in bold red
+RED="\033[01;31m"
+function reportError() {
+    echo -e ""
+    echo -e ${RED}"${1}"${RST}
+    if [[ -z ${2} ]]; then
+        echo -e ""
+    fi
+
+    exit
+}
+
+while [[ $# -ge 1 ]]; do
+	case "${1}" in
+
+		"-c"|"--config")
+			shift
+
+			if [[ $# -ge 1 ]]; then
+				DEFCONFIG=${1}
+			else
+				reportError "Please specify a defconfig!"
+			fi ;;
+
+		"-d"|"--device")
+			shift
+
+			case ${1} in
+				"gts210vewifi")
+				DEVICE=${1} ;;
+				*)
+					reportError "Invalid device!" ;;
+			esac ;;
+
+		"-h"|"--help")
+			h ;;
+
+		"-w"|"--wrap")
+			WRAP=true ;;
+
+		*)
+			reportError "Invalid parameter" ;;
+	esac
+	shift
+done
