@@ -32,3 +32,8 @@ ch() {
 reb() {
     git rebase -i HEAD^
 }
+
+# Quick ours checkout
+ou() {
+    git checkout --ours "$1" && git add . && git reset
+}
