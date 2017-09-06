@@ -17,6 +17,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
+back="\e[43m"
+color="\e[33m"
+normal="\e[0m"
+SSD=/media/joe2k01/SSD/WhitePugKernels/
+
 # Start the whole stuff with a nice help function
 function h() {
 	echo -e ""
@@ -24,14 +29,32 @@ function h() {
 	exit
 }
 
+# Device check
 if [ -z "$1" ]; then
 	echo -e "Specify a device"
+	h
 	exit
 else
 	if [ "$1" == "gts210vewifi" ] || [ "$1" == "hammerheadcaf" ]; then
-		echo -e " "
+		if [ "$1" == "gts210vewifi" ]; then
+			ARCH=arm64
+			CROSS_COMPILE=${SSD}aarch64-linux-android-4.9/bin/aarch64-linux-android-
+			DEFCONFIG=wpk_$1_defconfig
+		else
+			ARCH=arm
+			CROSS_COMPILE=${SSD}arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
+			DEFCONFIG=wpk_defconfig
+		fi
 	else
 		echo -e "$1 is not supported"
 		exit
 	fi
 fi
+
+#Build it
+echo -e "${color}Compiling kernel${normal}"
+make -s clean &&
+make -s mrproper &&
+make -s $DEFCONFIG &&
+make -s -j$( nproc --all ) &&
+echo -e "${color}Compilation went fine"
