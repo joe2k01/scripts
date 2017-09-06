@@ -20,7 +20,8 @@
 color="\e[33m"
 normal="\e[0m"
 SSD=/media/joe2k01/SSD/WhitePugKernels/
-zip=../$1/WhitePugKernel-V$2.zip
+zip=WhitePugKernel-V$2.zip
+anykernel=${SSD}$1
 
 # Start the whole stuff with a nice help function
 function h() {
@@ -31,8 +32,9 @@ function h() {
 
 function package()
 {
-	cd ../$1
-	zip -r9 -q $zip * -x README $zip
+	cd ${anykernel}
+	zip -q -r9 $zip * -x README.md $zip
+	wait
 }
 
 # Device check
