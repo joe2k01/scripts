@@ -17,16 +17,22 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-back="\e[43m"
 color="\e[33m"
 normal="\e[0m"
 SSD=/media/joe2k01/SSD/WhitePugKernels/
+zip=../$1/WhitePugKernel-V$2.zip
 
 # Start the whole stuff with a nice help function
 function h() {
 	echo -e ""
 	echo -e "${BOLD}How to use:${RST} ./${0#./} device\n"
 	exit
+}
+
+function package()
+{
+	cd ../$1
+	zip -r9 -q $zip * -x README $zip
 }
 
 # Device check
@@ -58,3 +64,28 @@ make -s mrproper &&
 make -s $DEFCONFIG &&
 make -s -j$( nproc --all ) &&
 echo -e "${color}Compilation went fine"
+
+# Package in zip
+clear
+echo -e "${color}Packaging${normal}"
+if [ "$1" == "gts210vewifi" ]; then
+	rm ../$1/Image.gz ../$1/*.zip
+	cp arch/arm64/boot/Image.gz ../$1/
+	package
+else
+	rm ../$1/zImage-dtb ../$1/*.zip
+	cp arch/arm/boot/zImage-dtb ../$1/
+	package
+fi
+
+sleep 4
+
+echo -e "${color}"
+echo -e "         _    _ _     _ _      ______            _   __                     _ "
+echo -e "        | |  | | |   (_| |     | ___ \          | | / /                    | |"
+echo -e "        | |  | | |__  _| |_ ___| |_/ _   _  __ _| |/ /  ___ _ __ _ __   ___| |"
+echo -e "        | |/\| |  _ \| | __/ _ |  __| | | |/ _  |    \ / _ |  __|  _ \ / _ | |"
+echo -e "        \  /\  | | | | | ||  __| |  | |_| | (_| | |\  |  __| |  | | | |  __| |"
+echo -e "         \/  \/|_| |_|_|\__\___\_|   \__ _|\__  \_| \_/\___|_|  |_| |_|\___|_|"
+echo -e "                                           __/ |                              "
+echo -e "                                          |___/                               "
