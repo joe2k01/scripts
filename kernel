@@ -20,12 +20,18 @@
 # Start the whole stuff with a nice help function
 function h() {
 	echo -e ""
-	echo -e "${BOLD}How to use:${RST} ./${0#./} <options>\n"
-	echo -e "${BOLD}Options list:${RST}"
-	echo -e "  -w, --wrap:        Wrap config inside wpk_ and _defconfig"
-	echo -e "  -c, --config:      The defconfig to use while compiling"
-	echo -e "  -d, --device:      The device to compile"
+	echo -e "${BOLD}How to use:${RST} ./${0#./} device\n"
 	exit
 }
 
-h
+if [ -z "$1" ]; then
+	echo -e "Specify a device"
+	exit
+else
+	if [ "$1" == "gts210vewifi" ] || [ "$1" == "hammerheadcaf" ]; then
+		echo -e " "
+	else
+		echo -e "$1 is not supported"
+		exit
+	fi
+fi
