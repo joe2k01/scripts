@@ -50,7 +50,7 @@ else
 			DEFCONFIG=wpk_$1_defconfig
 		else
 			ARCH=arm
-			CROSS_COMPILE=${SSD}arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
+			CROSS_COMPILE=${SSD}gcc-linaro-6.3.1-2017.05-x86_64_arm-eabi/bin/arm-eabi-
 			DEFCONFIG=wpk_defconfig
 		fi
 	else
