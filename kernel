@@ -64,13 +64,8 @@ echo -e "${color}Compiling kernel${normal}"
 make -s clean &&
 make -s mrproper &&
 make -s $DEFCONFIG &&
-if [ "$1" == "gts210vewifi" ]; then
-	make -s -j$( nproc --all ) &&
-	echo -e "${color}Compilation went fine"
-else
-	make -s -j$( nproc --all ) CONFIG_NO_ERROR_ON_MISMATCH=y &&
-	echo -e "${color}Compilation went fine"
-fi
+make -s -j$( nproc --all ) &&
+echo -e "${color}Compilation went fine"
 
 # Package in zip
 clear
