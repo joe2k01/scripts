@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#
+# Little script to apply a patch downloaded with froma raw web page
+#
+
+version() {
+	echo "Git WebApply beta 1"
+	echo "My first try with git plugins"
+}
+
+
+usage() {
+	echo "Provide as first argument the web url"
+}
+
+main() {
+	
+}
