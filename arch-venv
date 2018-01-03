@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#
+# Quick python virtual env setup to build android on my Arch Linux PC
+#
+# Copyright (C) 2018 Giuseppe "joe2k01" Barillari
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>
+
+virtualenv2 /mnt/xenon-o.1/venv
+source /mnt/xenon-o.1/venv/bin/activate
+ln -s /usr/lib/python2.7/* /mnt/xenon-o.1/venv/lib/python2.7/
